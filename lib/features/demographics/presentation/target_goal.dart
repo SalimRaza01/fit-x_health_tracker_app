@@ -27,10 +27,6 @@ class _TargetGoalState extends State<TargetGoal> {
     }
   }
 
-  void saveSpeed() async {
-    await _hiveDb.putDouble("weeklyGoalSpeed", selectedSpeed);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +34,6 @@ class _TargetGoalState extends State<TargetGoal> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
-
           children: [
             const SizedBox(height: 40),
 
@@ -59,10 +54,7 @@ class _TargetGoalState extends State<TargetGoal> {
             Text(
               paceMessage,
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 14,
-                color: Colors.white70,
-              ),
+              style: const TextStyle(fontSize: 14, color: Colors.white70),
             ),
 
             const SizedBox(height: 120),
@@ -104,12 +96,14 @@ class _TargetGoalState extends State<TargetGoal> {
                 onChanged: (value) {
                   setState(() {
                     selectedSpeed = double.parse(value.toStringAsFixed(2));
+                    Future.delayed(Duration(seconds: 2), () {
+                      _hiveDb.putDouble("weeklyGoalSpeed", selectedSpeed);
+                             print('weeklyGoalSpeed Saved');
+                    });
                   });
                 },
               ),
             ),
-
-         
           ],
         ),
       ),

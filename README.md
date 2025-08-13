@@ -1,5 +1,8 @@
 # 🏋️‍♂️ FitX App
 
+<img width="1920" height="1080" alt="Group 64800-2" src="https://github.com/user-attachments/assets/fd9df178-1c7d-47a6-92ce-4986c0bf1cd5" />
+
+
 
 **FitX** is a next-gen fitness and health tracking application built with Flutter, inspired by the advanced analytics of Whoop.  
 It helps users monitor strain, recovery, sleep, and overall wellness while syncing seamlessly with BLE-enabled wearables.
@@ -52,6 +55,3 @@ It helps users monitor strain, recovery, sleep, and overall wellness while synci
 - Premium UI charts for visualizing health metrics and trends.
 
 ---
-
-
-# fit-x_health_tracker_app

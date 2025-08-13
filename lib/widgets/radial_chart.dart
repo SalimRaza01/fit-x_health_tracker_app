@@ -14,7 +14,7 @@ class ActivityRingsWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // LEFT VALUES
+
         Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -164,7 +164,6 @@ class ActivityRingsWidget extends StatelessWidget {
 
         const SizedBox(width: 16),
 
-        // RIGHT VALUES
         Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

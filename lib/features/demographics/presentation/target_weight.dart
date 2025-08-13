@@ -181,6 +181,12 @@ class _TargetWeightScreenState extends State<TargetWeightScreen> {
                         hintText: "Enter weight",
                         hintStyle: TextStyle(color: Colors.white54),
                       ),
+                      onChanged: (value) {
+                        Future.delayed(Duration(seconds: 2),(){
+                          _hiveDb.putString("targetWeight", value);
+                          print('Target Value Saved');
+                        });
+                      },
                     ),
                   ),
                 ),

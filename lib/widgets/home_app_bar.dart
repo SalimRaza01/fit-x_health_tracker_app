@@ -7,7 +7,6 @@ import 'calender_tile.dart';
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,12 +34,9 @@ class HomeAppBar extends StatelessWidget {
               padding: EdgeInsets.only(top: 8, bottom: 12),
               child: CalenderTile(),
             ),
-                     const Padding(
-              padding: EdgeInsets.only(top: 8, bottom: 5, left: 10),
-              child: CircleAvatar(
-                radius: 17,
-                backgroundImage: AssetImage("assets/images/athlete1.png"),
-              ),
+            Padding(
+              padding: EdgeInsets.only(top: 8, bottom: 5, right: 10),
+              child: Image.asset("assets/icons/watch_icon.png"),
             ),
           ],
         ),

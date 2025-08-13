@@ -84,7 +84,7 @@ class _SplashScreenState extends State<SplashScreen>
       // _showLoadingDialog(context);
 
       Future.delayed(const Duration(seconds: 2), () {
-  context.go('/setupDemographics');
+  context.go('/loginScreen');
       });
 
 

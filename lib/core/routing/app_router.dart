@@ -1,3 +1,5 @@
+import 'package:fit_x/features/auth/presentation/login_screen.dart';
+import 'package:fit_x/features/auth/presentation/otp_screen.dart';
 import 'package:fit_x/features/demographics/presentation/health_connect.dart';
 import 'package:fit_x/features/demographics/presentation/height_selection.dart';
 import 'package:fit_x/features/demographics/presentation/medical_condition.dart';
@@ -28,7 +30,7 @@ class AppRouter {
   AppRouter._internal();
 
   final GoRouter _router = GoRouter(
-    initialLocation: '/splashScreen',
+    initialLocation: '/setupDemographics',
     routes: [
       GoRoute(
         path: '/splashScreen',
@@ -131,6 +133,14 @@ class AppRouter {
       GoRoute(
         path: '/connectionProgress',
         builder: (context, state) => const ConnectionProgress(),
+      ),
+      GoRoute(
+        path: '/loginScreen',
+        builder: (context, state) => const LoginScreen(),
+      ),
+      GoRoute(
+        path: '/otpScreen',
+        builder: (context, state) => const OTPScreen(),
       ),
 
       // Add other routes here

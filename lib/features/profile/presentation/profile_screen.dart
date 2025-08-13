@@ -26,7 +26,7 @@ class ProfileScreen extends StatelessWidget {
                 spacing: 30.0,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.only(left: 10, right: 10, top: 20 ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

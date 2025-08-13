@@ -88,7 +88,7 @@ void initState() {
                 ),
               ),
               Positioned(
-                top: 265,
+                top: 290,
                 right: 69,
                 child: CustomPaint(
                   painter: CirclePainter(_controllerripple, color: color),

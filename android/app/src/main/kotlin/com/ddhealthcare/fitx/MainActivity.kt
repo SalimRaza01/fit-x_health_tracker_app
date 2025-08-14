@@ -1,4 +1,4 @@
-package com.example.fit_x
+package com.ddhealthcare.fitx
 
 import io.flutter.embedding.android.FlutterActivity
 

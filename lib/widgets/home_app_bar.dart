@@ -1,3 +1,4 @@
+import 'package:fit_x/widgets/battery_info_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -6,6 +7,15 @@ import 'calender_tile.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
+
+  void _showBatterySheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (context) => const BatteryInfoSheet(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +44,14 @@ class HomeAppBar extends StatelessWidget {
               padding: EdgeInsets.only(top: 8, bottom: 12),
               child: CalenderTile(),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 8, bottom: 5, right: 10),
-              child: Image.asset("assets/icons/watch_icon.png"),
+            InkWell(
+       onTap: () {
+         _showBatterySheet(context);
+       },
+              child: Padding(
+                padding: EdgeInsets.only(top: 8, bottom: 5, right: 10),
+                child: Image.asset("assets/icons/watch_icon.png"),
+              ),
             ),
           ],
         ),

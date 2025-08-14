@@ -9,6 +9,9 @@ import 'package:fit_x/features/demographics/presentation/target_goal.dart';
 import 'package:fit_x/features/demographics/presentation/target_weight.dart';
 import 'package:fit_x/features/demographics/presentation/weight_selection.dart';
 import 'package:fit_x/features/home/category/overview.dart';
+import 'package:fit_x/features/home/food_tracker/presentation/food_main_screen.dart';
+import 'package:fit_x/features/home/food_tracker/presentation/search_meal.dart';
+import 'package:fit_x/features/home/food_tracker/presentation/track_meal.dart';
 import 'package:fit_x/features/home/presentation/home_screen.dart';
 import 'package:fit_x/features/main/presentation/main_screen.dart';
 import 'package:fit_x/features/device_setup/presentation/bluetooth_screen.dart';
@@ -30,7 +33,7 @@ class AppRouter {
   AppRouter._internal();
 
   final GoRouter _router = GoRouter(
-    initialLocation: '/setupDemographics',
+    initialLocation: '/mainScreen',
     routes: [
       GoRoute(
         path: '/splashScreen',
@@ -142,7 +145,18 @@ class AppRouter {
         path: '/otpScreen',
         builder: (context, state) => const OTPScreen(),
       ),
-
+  GoRoute(
+        path: '/foodMainScreen',
+        builder: (context, state) =>  FoodMainScreen(),
+      ),
+        GoRoute(
+        path: '/trackMeal',
+        builder: (context, state) =>  TrackMealScreen(),
+      ),
+              GoRoute(
+        path: '/searchMeal',
+        builder: (context, state) =>  SearchMealScreen(),
+      ),
       // Add other routes here
     ],
   );

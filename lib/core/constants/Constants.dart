@@ -109,46 +109,4 @@ class Constants{
   static const String verifyEmailSuccess = "Email verified successfully.";
   static const String verifyEmailError = "Error verifying email. Please try again.";
 
-  static const String senderUID = "senderUID";
-  static const String receiverUID = "receiverUID";
-  static const String message = "message";
-  static const String messageType = "messageType";
-  static const String isMe = "isMe";
-  static const String timestamp = "timestamp";
-  static const String messageID = "messageID";
-  static const String messageStatus = "messageStatus";
-  static const String senderName = "senderName";
-  static const String senderImage = "senderImage";
-  static const String timeSent = "timeSent";
-  static const String isSeen = "isSeen";
-  static const String repliedMessage = "repliedMessage";
-  static const String repliedTo = "repliedTo";
-  static const String repliedMessageType = "repliedMessageType";
-  static const String reactions = "reactions";
-
-  static const String isArchived = "isArchived";
-  static const String isMuted = "isMuted";
-  static const String unseenCount = "unseenCount";
-
-  static const String chats = "chats";
-  static const String messages = "messages";
-  static const String lastMessages = "lastMessages";
-  static const String lastMessage = "lastMessage";
-  static const String groups = "groups";
-  static const String chatFiles = "chatFiles";
-
-
-  static const permissionScreen = '/permission-onboarding';
-  static const qrcodeScreen = '/qrcodeScreen';
-  static const successScreen = '/successScreen';
-
-  static const voiceCallScreen = '/voiceCallScreen';
-  static const voiceCallRoute = 'voiceCallRoute';
-
-
-
-
-  //Testing Constants
-
-  static const OnBoardingPagerScreen = "/onboardingPager";
 }

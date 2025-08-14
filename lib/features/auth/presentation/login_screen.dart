@@ -1,5 +1,4 @@
 
-import 'package:fit_x/core/constants/Constants.dart';
 import 'package:fit_x/core/constants/GlobalMethods.dart';
 import 'package:fit_x/core/provider/AuthProvider.dart';
 import 'package:flutter/material.dart';
@@ -154,12 +153,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       final fullPhone = "+91$phoneNumber";
                       authProvider.sendOtp(
                         phoneNumber: fullPhone,
-                        onCodeSent: () {
-                          _btnController.success();
-                        Future.delayed(Duration(seconds: 1),(){
-                          context.go(Constants.OtpScreen);
-                        });
-                        },
+           onCodeSent: () async {
+  _btnController.success();
+await  Future.delayed(const Duration(seconds: 1), () {
+
+    context.push('/otpScreen');
+  });
+},
+
                         onError: (error) {
                           _btnController.error();
                           ScaffoldMessenger.of(context).showSnackBar(

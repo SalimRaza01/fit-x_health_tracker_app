@@ -1,14 +1,27 @@
 import 'package:fit_x/core/constants/app_colors.dart';
+import 'package:fit_x/widgets/select_meal.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class TrackFoodCard extends StatelessWidget {
   const TrackFoodCard({super.key});
+
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+  
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (context) => const SelectMeal(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: AppColor.borderColor),
+
         borderRadius: BorderRadius.circular(15),
         gradient: LinearGradient(
           colors: [AppColor.chartGradient1, AppColor.chartGradient2],
@@ -27,7 +40,7 @@ class TrackFoodCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Image.asset('assets/icons/foodicon.png', height: 35),
+                 SvgPicture.asset('assets/icons/foodtrack.svg'),
                     const SizedBox(width: 8),
                     const Text(
                       'TRACK FOOD',
@@ -39,13 +52,18 @@ class TrackFoodCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: AppColor.textGrey),
-                    borderRadius: BorderRadius.circular(8),
+                InkWell(
+                  onTap: () {
+                    _showBottomSheet(context);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: AppColor.textGrey),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.add, color: Colors.white),
                   ),
-                  child: const Icon(Icons.add, color: Colors.white),
                 ),
               ],
             ),

@@ -1,8 +1,7 @@
 import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fit_x/core/constants/GlobalMethods.dart';
 import 'package:fit_x/core/data/models/UserModel.dart';
 import 'package:fit_x/core/services/SharedPreferences.dart';
@@ -26,8 +25,7 @@ class AuthProvider extends ChangeNotifier {
   String? get phoneNumber => _phoneNumber;
   UserModel? get userModel => _userModel;
 
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final FirebaseStorage _storage = FirebaseStorage.instance;
+  // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   String? _verificationId;
 
@@ -43,10 +41,10 @@ class AuthProvider extends ChangeNotifier {
   }
 
   // ─────────────────────────────────────────────────────
-  Future<bool> checkUserExists() async {
-    DocumentSnapshot documentSnapshot = await _firestore.collection(Constants.users).doc(_uid).get();
-    return documentSnapshot.exists;
-  }
+  // Future<bool> checkUserExists() async {
+  //   DocumentSnapshot documentSnapshot = await _firestore.collection(Constants.users).doc(_uid).get();
+  //   return documentSnapshot.exists;
+  // }
 
 
   //Check Authentication State
@@ -56,7 +54,7 @@ class AuthProvider extends ChangeNotifier {
 
     if (_auth.currentUser != null) {
       _uid = _auth.currentUser!.uid;
-      await getUserDataFromFirestore();
+      // await getUserDataFromFirestore();
 
       if (_userModel != null) {
         await saveUserDataToSharedPreferences();
@@ -95,24 +93,24 @@ class AuthProvider extends ChangeNotifier {
   // ─────────────────────────────────────────────────────
 
 
-  Future<void> getUserDataFromFirestore() async {
-    try {
-      final documentSnapshot = await _firestore.collection(Constants.users).doc(_uid).get();
+  // Future<void> getUserDataFromFirestore() async {
+  //   try {
+  //     final documentSnapshot = await _firestore.collection(Constants.users).doc(_uid).get();
 
-      final data = documentSnapshot.data();
-      if (data != null) {
-        _userModel = UserModel.fromMap(data);
-      } else {
-        _userModel = null;
-        print("⚠️ No user data found for UID $_uid");
-      }
+  //     final data = documentSnapshot.data();
+  //     if (data != null) {
+  //       _userModel = UserModel.fromMap(data);
+  //     } else {
+  //       _userModel = null;
+  //       print("⚠️ No user data found for UID $_uid");
+  //     }
 
-      notifyListeners();
-    } catch (e) {
-      print("🔥 Error fetching user data: $e");
-      _userModel = null;
-    }
-  }
+  //     notifyListeners();
+  //   } catch (e) {
+  //     print("🔥 Error fetching user data: $e");
+  //     _userModel = null;
+  //   }
+  // }
 
   // 📱 Sign In with Phone Number
   Future<void> signInWithPhoneNumber({

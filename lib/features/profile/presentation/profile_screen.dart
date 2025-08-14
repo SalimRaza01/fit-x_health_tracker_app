@@ -1,6 +1,6 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -10,6 +10,32 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff080B0D),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Color(0xff495965),
+        leading: InkWell(
+          onTap: () => context.pop(),
+          child: const Icon(
+            CupertinoIcons.chevron_back,
+            color: Color(0xffBABABA),
+          ),
+        ),
+        title: Text(
+          "PROFILE",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+            letterSpacing: 1.2,
+          ),
+        ),
+        actions: [
+          InkWell(
+            onTap: () => context.pop(),
+            child: SvgPicture.asset('assets/icons/editprofile.svg'),
+          ),
+          SizedBox(width: 15,)
+        ],
+      ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -25,29 +51,6 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 spacing: 30.0,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10, top: 20 ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                          onTap: () => context.pop(),
-                          child: const Icon(
-                            CupertinoIcons.chevron_back,
-                            color: Color(0xffBABABA),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () => context.pop(),
-                          child: const Icon(
-                            CupertinoIcons.square_pencil_fill,
-                            color: Color(0xffBABABA),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -83,7 +86,6 @@ class ProfileScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-
                           const Text(
                             "Male - 25  -  91 5555 4444",
                             style: TextStyle(color: Colors.grey, fontSize: 12),
@@ -96,7 +98,6 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 16),
                     padding: const EdgeInsets.symmetric(
@@ -121,7 +122,6 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -130,10 +130,9 @@ class ProfileScreen extends StatelessWidget {
                       _buildStat("78", "SLEEP", Color(0xff5580C2)),
                     ],
                   ),
-
                   Row(
                     children: const [
-                       Expanded(child: Divider(color: Colors.white10)),
+                      Expanded(child: Divider(color: Colors.white10)),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8),
                         child: Text(
@@ -147,7 +146,6 @@ class ProfileScreen extends StatelessWidget {
                       Expanded(child: Divider(color: Colors.white10)),
                     ],
                   ),
-
                   _buildSection("DEVICE SETTINGS", [
                     "Device Connection",
                     "Firmware Update",
@@ -167,8 +165,6 @@ class ProfileScreen extends StatelessWidget {
                     "Log-Out",
                     "Delete Account",
                   ]),
-
-            
                 ],
               ),
             ),
@@ -224,7 +220,6 @@ class ProfileScreen extends StatelessWidget {
         border: Border.all(color: Color(0xff4D6171), width: 0.5),
       ),
       child: ExpansionTile(
-   
         minTileHeight: 40,
         collapsedIconColor: Colors.grey,
         iconColor: Colors.white,
@@ -236,29 +231,27 @@ class ProfileScreen extends StatelessWidget {
             fontSize: 12,
           ),
         ),
-        children:
-            items
-                .map(
-                  (item) => ListTile(
-                    title: Text(
-                      item,
-                      style: TextStyle(
-                        color:
-                            item.contains("Delete") || item.contains("Log-Out")
-                                ? Colors.redAccent
-                                : Colors.white,
-                        fontSize: 12,
-                      ),
-                    ),
-                    trailing: const Icon(
-                      Icons.arrow_forward_ios,
-                      size: 14,
-                      color: Colors.grey,
-                    ),
-                    onTap: () {},
+        children: items
+            .map(
+              (item) => ListTile(
+                title: Text(
+                  item,
+                  style: TextStyle(
+                    color: item.contains("Delete") || item.contains("Log-Out")
+                        ? Colors.redAccent
+                        : Colors.white,
+                    fontSize: 12,
                   ),
-                )
-                .toList(),
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 14,
+                  color: Colors.grey,
+                ),
+                onTap: () {},
+              ),
+            )
+            .toList(),
       ),
     );
   }

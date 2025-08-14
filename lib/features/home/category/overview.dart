@@ -6,6 +6,7 @@ import 'package:fit_x/widgets/syncfusion/stress_monitor_overview.dart';
 import 'package:fit_x/widgets/syncfusion/steps_overview_chart.dart';
 import 'package:fit_x/widgets/syncfusion/strain_recovery_overview.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Overview extends StatefulWidget {
   const Overview({super.key});
@@ -42,7 +43,11 @@ class _OverviewState extends State<Overview> {
                 ),
                 child: ActivityRingsWidget(onSwitch: () {}),
               ),
-              TrackFoodCard(),
+              InkWell(
+                onTap: () {
+                  context.push('/foodMainScreen');
+                },
+                child: TrackFoodCard()),
               StepsOverviewChart(),
               HealthMonitorGrid(),
               StressMonitorOverview(),
@@ -50,6 +55,7 @@ class _OverviewState extends State<Overview> {
               SizedBox(height: 100),
             ],
           ),
+
         ),
       ),
     );

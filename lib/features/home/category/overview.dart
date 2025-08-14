@@ -1,4 +1,5 @@
 // ignore_for_file: unused_element
+import 'package:fit_x/core/services/firebase_firestore.dart';
 import 'package:fit_x/widgets/syncfusion/food_tracker_widget.dart';
 import 'package:fit_x/widgets/radial_chart.dart';
 import 'package:fit_x/widgets/syncfusion/health_monitor_grid.dart';
@@ -19,6 +20,7 @@ class _OverviewState extends State<Overview> {
   @override
   void initState() {
     super.initState();
+    fetchUserData();
   }
 
   @override

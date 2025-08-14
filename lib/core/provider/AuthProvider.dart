@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 // import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_x/core/constants/GlobalMethods.dart';
 import 'package:fit_x/core/data/models/UserModel.dart';
@@ -25,7 +26,7 @@ class AuthProvider extends ChangeNotifier {
   String? get phoneNumber => _phoneNumber;
   UserModel? get userModel => _userModel;
 
-  // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   String? _verificationId;
 
@@ -41,11 +42,14 @@ class AuthProvider extends ChangeNotifier {
   }
 
   // ─────────────────────────────────────────────────────
-  // Future<bool> checkUserExists() async {
-  //   DocumentSnapshot documentSnapshot = await _firestore.collection(Constants.users).doc(_uid).get();
-  //   return documentSnapshot.exists;
-  // }
+  Future<bool> checkUserExists() async {
+    print('Checking user with UID: $_uid');
 
+    DocumentSnapshot documentSnapshot =
+        await _firestore.collection(Constants.users).doc(_uid).get();
+    print('checking user ${documentSnapshot.exists}');
+    return documentSnapshot.exists;
+  }
 
   //Check Authentication State
 
@@ -82,7 +86,8 @@ class AuthProvider extends ChangeNotifier {
 
   // ─────────────────────────────────────────────────────
   Future<void> getDataFromSharedPreferences() async {
-    final userModelString = await SharedPrefsService.instance.getString(Constants.userModel) ?? "";
+    final userModelString =
+        await SharedPrefsService.instance.getString(Constants.userModel) ?? "";
     if (userModelString.isNotEmpty) {
       _userModel = UserModel.fromMap(jsonDecode(userModelString));
       _uid = _userModel!.uid;
@@ -91,7 +96,6 @@ class AuthProvider extends ChangeNotifier {
   }
 
   // ─────────────────────────────────────────────────────
-
 
   // Future<void> getUserDataFromFirestore() async {
   //   try {
@@ -152,7 +156,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-
   // Send OTP
   Future<void> sendOtp({
     required String phoneNumber,
@@ -206,7 +209,10 @@ class AuthProvider extends ChangeNotifier {
         verificationId: _verificationId!,
         smsCode: smsCode,
       );
-      await _auth.signInWithCredential(credential);
+      final userCredential = await _auth.signInWithCredential(credential);
+
+      _uid = userCredential.user?.uid;
+      _phoneNumber = userCredential.user?.phoneNumber;
       onSuccess();
     } on FirebaseAuthException catch (e) {
       onError(_parseFirebaseAuthException(e));
@@ -250,7 +256,4 @@ class AuthProvider extends ChangeNotifier {
         return e.message ?? 'Authentication error occurred.';
     }
   }
-
-
-
 }

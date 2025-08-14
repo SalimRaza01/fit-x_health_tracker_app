@@ -1,5 +1,7 @@
 
 
+// ignore_for_file: constant_identifier_names
+
 class Constants{
   static const String baseUrl = "https://api.themoviedb.org/3";
   static const String appName = "Fit X";

@@ -40,11 +40,10 @@ class _SetThingsUpState extends State<SetThingsUp> {
   void _pickDate() {
     DatePicker.showDatePicker(
       pickerTheme: DateTimePickerTheme(
-        backgroundColor: AppColor.universalGrey,
-        itemTextStyle: TextStyle(color: Colors.white),
-        cancelTextStyle: TextStyle(color: Colors.redAccent),
-        confirmTextStyle: TextStyle(color: Colors.green)
-      ),
+          backgroundColor: AppColor.universalGrey,
+          itemTextStyle: TextStyle(color: Colors.white),
+          cancelTextStyle: TextStyle(color: Colors.redAccent),
+          confirmTextStyle: TextStyle(color: Colors.green)),
       context,
       dateFormat: 'dd MMMM yyyy',
       initialDateTime: DateTime(2000, 1, 1),
@@ -63,6 +62,15 @@ class _SetThingsUpState extends State<SetThingsUp> {
     _hivedb.putString('name', nameController.text);
     _hivedb.putString('dob', dobController.text);
     _hivedb.putString('gender', selectedGender);
+    if (dobController.text.isNotEmpty) {
+      DateTime dob = DateTime.parse(dobController.text);
+      int age = DateTime.now().year - dob.year;
+      if (DateTime.now().month < dob.month ||
+          (DateTime.now().month == dob.month && DateTime.now().day < dob.day)) {
+        age--;
+      }
+      _hivedb.putInt('age', age);
+    }
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(const SnackBar(content: Text("Profile saved")));

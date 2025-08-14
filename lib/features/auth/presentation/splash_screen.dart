@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -27,6 +28,8 @@ class _SplashScreenState extends State<SplashScreen>
   late Animation<double> _taglineOpacity;
   late Animation<Offset> _taglineSlide;
   final AudioPlayer _audioPlayer = AudioPlayer();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
 
 
   @override
@@ -83,9 +86,20 @@ class _SplashScreenState extends State<SplashScreen>
 
       // _showLoadingDialog(context);
 
-      Future.delayed(const Duration(seconds: 2), () {
+
+       _auth.authStateChanges().listen((User? user) {
+    if (user == null) {
+         Future.delayed(const Duration(seconds: 2), () {
   context.go('/loginScreen');
       });
+
+    } else {
+         Future.delayed(const Duration(seconds: 2), () {
+  context.go('/mainScreen');
+      });
+
+    }
+  });
 
 
   }

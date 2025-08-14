@@ -26,7 +26,7 @@ class _SetupDemographicsState extends State<SetupDemographics> {
 
   void finalization(BuildContext context) {
     Future.delayed(const Duration(seconds: 2), () {
-      context.go('/appConnect');
+      context.push('/appConnect');
     });
   }
 

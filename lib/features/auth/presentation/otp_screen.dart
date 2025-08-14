@@ -19,8 +19,8 @@ class _OTPScreenState extends State<OTPScreen> {
   bool enableContinue = false;
   int secondsRemaining = 59;
   late Timer timer;
-  final RoundedLoadingButtonController _otpBtnController = RoundedLoadingButtonController();
-
+  final RoundedLoadingButtonController _otpBtnController =
+      RoundedLoadingButtonController();
 
   @override
   void initState() {
@@ -94,7 +94,6 @@ class _OTPScreenState extends State<OTPScreen> {
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1.2,
-               
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -105,7 +104,6 @@ class _OTPScreenState extends State<OTPScreen> {
                     color: Colors.white.withOpacity(0.85),
                     fontSize: 14,
                     height: 1.4,
-               
                   ),
                 ),
                 const SizedBox(height: 40),
@@ -151,38 +149,51 @@ class _OTPScreenState extends State<OTPScreen> {
                   child: RoundedLoadingButton(
                     controller: _otpBtnController,
                     borderRadius: 12,
-                    color: enableContinue ? Colors.white : Colors.white.withOpacity(0.1),
+                    color: enableContinue
+                        ? Colors.white
+                        : Colors.white.withOpacity(0.1),
                     successColor: Colors.green,
                     errorColor: Colors.red,
                     failedIcon: Icons.close,
                     successIcon: Icons.check,
-                    valueColor: enableContinue ? Colors.black : Colors.grey.shade500,
+                    valueColor:
+                        enableContinue ? Colors.black : Colors.grey.shade500,
                     onPressed: enableContinue
-
                         ? () {
-                      final authProvider = Provider.of<AuthProvider>(context, listen: false);
-                      authProvider.verifyOtp(
-                        smsCode: otp,
-                        onSuccess: () {
-                          _otpBtnController.success();
-                          Future.delayed(Duration(seconds: 2),() {
-                            context.go('/setupDemographics'); // Navigate after success
-                          });
-                        },
-                        onError: (error) {
-                          _otpBtnController.error();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(error),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
-                          Future.delayed(const Duration(seconds: 2), () {
-                            _otpBtnController.reset();
-                          });
-                        },
-                      );
-                    }
+                            final authProvider = Provider.of<AuthProvider>(
+                                context,
+                                listen: false);
+                            authProvider.verifyOtp(
+                              smsCode: otp,
+                              onSuccess: () async {
+                                _otpBtnController.success();
+
+                                bool exists =
+                                    await authProvider.checkUserExists();
+                                if (exists) {
+                                  Future.delayed(Duration(seconds: 2), () {
+                                    context.go('/mainScreen');
+                                  });
+                                } else {
+                                  Future.delayed(Duration(seconds: 2), () {
+                                    context.go('/setupDemographics');
+                                  });
+                                }
+                              },
+                              onError: (error) {
+                                _otpBtnController.error();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(error),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                                Future.delayed(const Duration(seconds: 2), () {
+                                  _otpBtnController.reset();
+                                });
+                              },
+                            );
+                          }
                         : null,
                     child: const Text(
                       "CONTINUE",
@@ -190,7 +201,6 @@ class _OTPScreenState extends State<OTPScreen> {
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         letterSpacing: 1.2,
-                   
                       ),
                     ),
                   ),
@@ -202,50 +212,57 @@ class _OTPScreenState extends State<OTPScreen> {
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.85),
                     fontSize: 14,
-               
                   ),
                 ),
                 const SizedBox(height: 6),
-             Row(
-               mainAxisAlignment: MainAxisAlignment.center,
-               children: [
-                 Text(
-                   "00:${secondsRemaining.toString().padLeft(2, '0')}",
-                   style:  TextStyle(
-                     color: enableContinue ? Colors.white.withOpacity(0.85) : Colors.white.withOpacity(0.4),
-                     fontSize: 18,
-                     fontWeight: FontWeight.w600,
-                     letterSpacing: 1.2,
-                
-                   ),
-                 ),
-                 const SizedBox(width: 15),
-                 Visibility(
-                   visible: secondsRemaining == 0,
-                   child: ElevatedButton(
-                     onPressed: enableContinue
-                         ? () {
-                       authProvider.verifyOtp(
-                         smsCode: otp,
-                         onSuccess: () {
-                           context.go('/setupDemographics'); // Update as needed
-                         },
-                         onError: (error) {
-                           ScaffoldMessenger.of(context).showSnackBar(
-                             SnackBar(
-                               content: Text(error),
-                               backgroundColor: Colors.red,
-                             ),
-                           );
-                         },
-                       );
-                     }
-                         : null,
-
-                      child: Text("Resend OTP",style: TextStyle(color: Colors.black,fontFamily: "Garet",),)),
-                 )
-               ],
-             ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "00:${secondsRemaining.toString().padLeft(2, '0')}",
+                      style: TextStyle(
+                        color: enableContinue
+                            ? Colors.white.withOpacity(0.85)
+                            : Colors.white.withOpacity(0.4),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                    const SizedBox(width: 15),
+                    Visibility(
+                      visible: secondsRemaining == 0,
+                      child: ElevatedButton(
+                          onPressed: enableContinue
+                              ? () {
+                                  authProvider.verifyOtp(
+                                    smsCode: otp,
+                                    onSuccess: () {
+                                      context.go(
+                                          '/setupDemographics'); // Update as needed
+                                    },
+                                    onError: (error) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(error),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    },
+                                  );
+                                }
+                              : null,
+                          child: Text(
+                            "Resend OTP",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: "Garet",
+                            ),
+                          )),
+                    )
+                  ],
+                ),
                 // Spacer(),
                 // Padding(
                 //   padding: const EdgeInsets.symmetric(vertical: 20),

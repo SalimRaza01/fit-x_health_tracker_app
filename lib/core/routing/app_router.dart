@@ -33,7 +33,7 @@ class AppRouter {
   AppRouter._internal();
 
   final GoRouter _router = GoRouter(
-    initialLocation: '/mainScreen',
+    initialLocation: '/splashScreen',
     routes: [
       GoRoute(
         path: '/splashScreen',
@@ -127,7 +127,7 @@ class AppRouter {
       ),
       GoRoute(
         path: '/profileScreen',
-        builder: (context, state) => const ProfileScreen(),
+        builder: (context, state) =>  ProfileScreen(),
       ),
       GoRoute(
         path: '/homeScreen',

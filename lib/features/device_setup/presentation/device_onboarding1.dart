@@ -1,5 +1,6 @@
-
 import 'package:fit_x/core/constants/app_colors.dart';
+import 'package:fit_x/core/services/firebase_firestore.dart';
+import 'package:fit_x/core/services/hive_db_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,11 +15,21 @@ class _DeviceOnboarding1State extends State<DeviceOnboarding1>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _slideAnimation;
+  final HiveDbHelper _hiveDb = HiveDbHelper();
 
   @override
   void initState() {
     super.initState();
-
+    saveUserData(
+        name: _hiveDb.getString('name').toString(),
+        age: _hiveDb.getInt('age').toString(),
+        dob: _hiveDb.getString('dob').toString(),
+        gender: _hiveDb.getString('gender').toString(),
+        height: _hiveDb.getDouble('myHeight').toString(),
+        weight: _hiveDb.getDouble('myWeight').toString(),
+        target_weight: _hiveDb.getString('targetWeight').toString(),
+        weekly_goal: _hiveDb.getDouble('weeklyGoalSpeed').toString());
+  
     _controller = AnimationController(
       duration: const Duration(milliseconds: 800),
       vsync: this,
@@ -80,9 +91,8 @@ class _DeviceOnboarding1State extends State<DeviceOnboarding1>
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                             const Color.fromARGB(0, 0, 0, 0),
+                        const Color.fromARGB(0, 0, 0, 0),
                         AppColor.backgroundLinearbottom,
-                   
                       ],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
@@ -134,7 +144,7 @@ class _DeviceOnboarding1State extends State<DeviceOnboarding1>
                           ),
                         ),
                         onPressed: () {
-                    context.push('/onboarding2');
+                          context.push('/onboarding2');
                         },
                         child: const Text(
                           'NEXT',
